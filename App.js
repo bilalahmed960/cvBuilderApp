@@ -1,21 +1,50 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Home from './screens/Home'
+import CreateCv from './screens/CreateCv'
+import Constants from 'expo-constants'
+import Profile from './screens/Profile'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
-export default function App() {
+const myOptions={
+    title:"All CV's",
+    headerTintColor:"white",
+    headerStyle:{backgroundColor:"#006aff"
+    }
+}
+const Stack = createStackNavigator();
+ function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Stack.Navigator >
+        <Stack.Screen 
+        name="Home" 
+        component={Home} 
+        options={myOptions} />
+        <Stack.Screen name="Create" component={CreateCv} options={{...myOptions,title:"Create Cv"}}/>
+        <Stack.Screen name="Profile" component={Profile} options={{...myOptions,title:"My Cv"}}/>
+    </Stack.Navigator>
+      {/* <Home /> */}
+      {/* <CreateCv /> */}
+      {/* <Profile /> */}
     </View>
   );
+}
+
+export default ()=>{
+  return(
+    <NavigationContainer>
+      <App />
+    </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: '#ebebeb',
+    marginTop:Constants.statusBarHeight
+  }
 });
