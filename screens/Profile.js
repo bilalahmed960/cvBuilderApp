@@ -1,12 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image,FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image,FlatList, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import {Title,Card,Button} from 'react-native-paper';
 import { MaterialIcons,Entypo } from '@expo/vector-icons';
 
 const Profile = (props)=>{
     
-    const {id,name,email,picture,salary,phone,position} = props.route.params.item
+    const {_id,name,email,picture,salary,phone,position} = props.route.params.item
+    const deleteEmploye = ()=>{
+        fetch("http://03b71ffd087e.ngrok.io/delete",{
+            method:"post",
+            headers:{
+             'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                id:_id
+            })
+        })
+        .then(res=>res.json())
+        .then(deletedEmp=>{
+            Alert.alert(`${deletedEmp.name} deleted`)
+            props.navigation.navigate("Home")
+        })
+        .catch(err=>{
+         Alert.alert("someting went wrong")
+        })
+    }
     return(
         <View style={style.root}>
             <LinearGradient 
@@ -16,7 +35,7 @@ const Profile = (props)=>{
             <View style={{alignItems:"center"}} > 
             <Image 
             style={{width:140,height:140,borderRadius:140/2,marginTop:-50}}
-            source={{uri:"https://images.unsplash.com/photo-1565464027194-7957a2295fb7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"}} />
+            source={{uri:picture }} />
             </View>
         
             <View style={{alignItems:"center",margin:1}}>
@@ -43,9 +62,12 @@ const Profile = (props)=>{
             </Card>
             <View style={{flexDirection:"row",justifyContent:"space-around",padding:10}} >
                 <Button theme={theme}
-                            icon="account-edit" mode="contained" onPress={() => console.log("Pressed")}>Edit CV</Button>
+                            icon="account-edit" mode="contained" onPress={() =>{
+                                props.navigation.navigate("Create",
+                            {_id,name,email,picture,salary,phone,position}
+                            )}}>Edit CV</Button>
                 <Button theme={theme}
-                            icon="delete" mode="contained" onPress={() => console.log("Pressed")}>Delete CV</Button>
+                            icon="delete" mode="contained" onPress={() => deleteEmploye()}>Delete CV</Button>
                 </View>
         </View>
         

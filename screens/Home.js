@@ -1,25 +1,36 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image,FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image,FlatList, Alert } from 'react-native';
 import {Card,FAB} from 'react-native-paper'
+import { useEffect, useState } from 'react';
 
 const Home = ({navigation})=> {
 
-    const data=[
-        {id:1,name:"Ali",email:"abc@gmail.com",salary:"2lac",phone:"02121821545",position:"web Dev",picture:"https://images.unsplash.com/flagged/photo-1578848151039-b8916d7c1c34?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=521&q=80"},
-        {id:2,name:"sara",email:"ghf@gmail.com",salary:"3lac",phone:"02121821545",position:"Android Dev",picture:"https://images.unsplash.com/flagged/photo-1578848151039-b8916d7c1c34?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=521&q=80"},
-        {id:3,name:"gogo",email:"fdd@gmail.com",salary:"4lac",phone:"02121821545",position:"java Dev",picture:"https://images.unsplash.com/flagged/photo-1578848151039-b8916d7c1c34?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=521&q=80"},
-        {id:4,name:"gul",email:"eee@gmail.com",salary:"5lac",phone:"021 21821545",position:"xml Dev",picture:"https://images.unsplash.com/flagged/photo-1578848151039-b8916d7c1c34?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=521&q=80"},
-    ]
+    const [data,setData] = useState([])
+    const [loading,setLoading] = useState(true)
+    const fetchData = ()=>{
+        fetch("http://03b71ffd087e.ngrok.io/")
+        .then(res=>res.json())
+        .then(results=>{
+            setData(results)
+            setLoading(false)
+        }).catch(err=>{
+            Alert.alert("something went wrong")
+        })
+    }
+
+    useEffect(()=>{
+        fetchData()
+    },[])
 
     const renderList =((item)=>{
-        return( <Card style={styles.mycard} key={item.id}
+        return( <Card style={styles.mycard} key={item._id}
             onPress={()=>navigation.navigate("Profile",{item})}
         >
 
             <View style={styles.cardView}>
                 <Image 
                     style={{width:60,height:60,borderRadius:50/2}}
-                    source={{uri:"https://images.unsplash.com/flagged/photo-1578848151039-b8916d7c1c34?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=521&q=80"}} />
+                    source={{uri:item.picture}}/>
                 
                 <View style={{marginLeft:10}}>
                     <Text style={styles.text}>{item.name}</Text>
@@ -30,14 +41,16 @@ const Home = ({navigation})=> {
     })
     return(
         <View style={{flex:1}}>
-           <FlatList 
-            data={data}
-            renderItem={({item})=>{
+                <FlatList 
+                data={data}
+                renderItem={({item})=>{
                 return renderList(item)
-            }}
-            keyExtractor={item=>item.id.toString()}
-
-           />
+                }}
+                keyExtractor={item=>item._id.toString()}
+                onRefresh={()=>fetchData()}
+                refreshing={loading}
+                />
+           
         <FAB onPress={()=>navigation.navigate("Create")}
             style={styles.fab}
             small={false}
