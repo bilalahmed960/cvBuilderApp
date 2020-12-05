@@ -28,7 +28,11 @@ app.post('/send-data',(req,res)=>{
         phone:req.body.phone,
         picture:req.body.picture,
         salary:req.body.salary,
-        position:req.body.position
+        position:req.body.position,
+        bio:req.body.bio,
+        education:req.body.education,
+        project:req.body.project
+
     })
     employee.save()
     .then(data=>{
@@ -59,7 +63,11 @@ app.post('/update',(req,res)=>{
         phone:req.body.phone,
         picture:req.body.picture,
         salary:req.body.salary,
-        position:req.body.position
+        position:req.body.position,
+        bio:req.body.bio,
+        education:req.body.education,
+        project:req.body.project
+        
     }).then(data=>{
         console.log(data)
         res.send(data)

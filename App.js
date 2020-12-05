@@ -8,8 +8,9 @@ import Profile from './screens/Profile'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
+
 const myOptions={
-    title:"All CV's",
+    title:"Dashboard",
     headerTintColor:"white",
     headerStyle:{backgroundColor:"#006aff"
     }
@@ -21,7 +22,7 @@ const Stack = createStackNavigator();
       <Stack.Navigator >
         <Stack.Screen 
         name="Home" 
-        component={Home} 
+        component={Home}  
         options={myOptions} />
         <Stack.Screen name="Create" component={CreateCv} options={{...myOptions,title:"Create Cv"}}/>
         <Stack.Screen name="Profile" component={Profile} options={{...myOptions,title:"My Cv"}}/>
@@ -29,6 +30,7 @@ const Stack = createStackNavigator();
       {/* <Home /> */}
       {/* <CreateCv /> */}
       {/* <Profile /> */}
+  
     </View>
   );
 }

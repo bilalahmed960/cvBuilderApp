@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
-import { StyleSheet,Text, View,Modal,Alert,KeyboardAvoidingView} from 'react-native';
-import {TextInput,Button} from 'react-native-paper'
+import { StyleSheet,Text, View,Modal,Alert,ScrollView,KeyboardAvoidingView} from 'react-native';
+import {TextInput,Button, Card} from 'react-native-paper'
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions'
 
@@ -19,7 +19,13 @@ const getDetails = (type)=>{
               case "picture":
                   return  route.params.picture
               case "position":
-                return  route.params.position  
+                return  route.params.position
+              case "bio":
+                return  route.params.bio 
+              case "education":
+                return  route.params.education 
+              case "project":
+                return  route.params.project   
           }
        }
        return ""
@@ -30,11 +36,14 @@ const getDetails = (type)=>{
     const [salary,setSalary] = useState(getDetails("salary"))
     const [picture,setPicture] = useState(getDetails("picture"))
     const [position,setPosition] = useState(getDetails("position"))
+    const [bio,setBio] = useState(getDetails("bio"))
+    const [education,setEducation] = useState(getDetails("education"))
+    const [project,setProject] = useState(getDetails("project"))
     const [modal,setModal] = useState(false)
     const [enableshift,setenableShift] = useState(false)
   
     const submitData = ()=>{
-        fetch("http://03b71ffd087e.ngrok.io/send-data",{
+        fetch("http://e8d61e58a27a.ngrok.io/send-data",{
             method:"post",
             headers:{
               'Content-Type': 'application/json'
@@ -45,7 +54,10 @@ const getDetails = (type)=>{
                 phone,
                 salary,
                 picture,
-                position
+                position,
+                bio,
+                education,
+                project
             })
         })
         .then(res=>res.json())
@@ -58,7 +70,7 @@ const getDetails = (type)=>{
         })
   }
   const updateDetails = ()=>{
-    fetch("http://03b71ffd087e.ngrok.io/update",{
+    fetch("http://e8d61e58a27a.ngrok.io/update",{
         method:"post",
         headers:{
           'Content-Type': 'application/json'
@@ -70,7 +82,10 @@ const getDetails = (type)=>{
             phone,
             salary,
             picture,
-            position
+            position,
+            bio,
+            education,
+            project
         })
     })
     .then(res=>res.json())
@@ -145,7 +160,10 @@ const getDetails = (type)=>{
         })
     }
     return( 
+        <ScrollView>
         <View style={Styles.Root}>
+            <Card style={Styles.myCard}>
+                <Text>Personl Info</Text>
             <TextInput
                 style={Styles.inputStyle}
                 theme={theme}
@@ -187,6 +205,41 @@ const getDetails = (type)=>{
                 value={position}
                 onChangeText={text => setPosition(text)}
                 />
+            </Card>
+                <Card style={Styles.myCard}> 
+                <Text>Work Details</Text>
+                <TextInput
+                multiline = {true}
+                numberOfLines = {5}
+                style={Styles.inputStyle}
+                theme={theme}
+                label="Bio"
+                mode="outlined"
+                value={bio}
+                onChangeText={text => setBio(text)}
+                />
+                
+                <TextInput
+                multiline = {true}
+                numberOfLines = {5}
+                style={Styles.inputStyle}
+                theme={theme}
+                label="Education"
+                mode="outlined"
+                value={education}
+                onChangeText={text => setEducation(text)}
+                />
+                <TextInput 
+                multiline = {true}
+                numberOfLines = {5}
+                style={Styles.inputStyle}
+                theme={theme}
+                label="Projects"
+                mode="outlined"
+                value={project}
+                onChangeText={text => setProject(text)}
+                />
+                </Card>
                 <Button style={Styles.inputStyle}
                 theme={theme} 
                 icon="upload" mode="contained" onPress={() => setModal(true)}>
@@ -230,6 +283,7 @@ const getDetails = (type)=>{
                     </View>
                </Modal>
         </View>
+        </ScrollView>
     )
 }
 
@@ -243,7 +297,18 @@ const Styles=StyleSheet.create({
         flex:1
     },
     inputStyle:{
-      margin:5
+        margin:5,
+        borderRadius:15,
+        elevation:1,
+        marginHorizontal:25
+    },
+    myCard:{
+        margin:5,
+        marginHorizontal:15,
+        padding:6,
+        borderRadius:15,
+        elevation:3,
+        marginBottom:16
     },
     modalView:{
       position:"absolute",
@@ -254,7 +319,8 @@ const Styles=StyleSheet.create({
     modalBttnView:{
         flexDirection:"row",
         justifyContent:"space-around",
-        padding:10
+        padding:10,
+
     }
 })
 export default CreateEmployee

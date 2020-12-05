@@ -6,6 +6,9 @@ const EmpoyeeSchema = new mongoose.Schema({
     phone:String,
     picture:String,
     salary:String,
-    position:String
+    position:String,
+    bio:String,
+    education:String,
+    project:String
 })
 mongoose.model("employee",EmpoyeeSchema)
