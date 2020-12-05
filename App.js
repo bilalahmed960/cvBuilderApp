@@ -9,34 +9,35 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 
-const myOptions={
-    title:"Dashboard",
-    headerTintColor:"white",
-    headerStyle:{backgroundColor:"#006aff"
-    }
+const myOptions = {
+  title: "Dashboard",
+  headerTintColor: "white",
+  headerStyle: {
+    backgroundColor: "#019386"
+  }
 }
 const Stack = createStackNavigator();
- function App() {
+function App() {
   return (
     <View style={styles.container}>
       <Stack.Navigator >
-        <Stack.Screen 
-        name="Home" 
-        component={Home}  
-        options={myOptions} />
-        <Stack.Screen name="Create" component={CreateCv} options={{...myOptions,title:"Create Cv"}}/>
-        <Stack.Screen name="Profile" component={Profile} options={{...myOptions,title:"My Cv"}}/>
-    </Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={myOptions} />
+        <Stack.Screen name="Create" component={CreateCv} options={{ ...myOptions, title: "Create Cv" }} />
+        <Stack.Screen name="Profile" component={Profile} options={{ ...myOptions, title: "My Cv" }} />
+      </Stack.Navigator>
       {/* <Home /> */}
       {/* <CreateCv /> */}
       {/* <Profile /> */}
-  
+
     </View>
   );
 }
 
-export default ()=>{
-  return(
+export default () => {
+  return (
     <NavigationContainer>
       <App />
     </NavigationContainer>
@@ -47,6 +48,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ebebeb',
-    marginTop:Constants.statusBarHeight
+    marginTop: Constants.statusBarHeight
   }
 });

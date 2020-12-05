@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image,FlatList, Alert } from 'react-native';
 import {Card,FAB} from 'react-native-paper'
 import { useEffect, useState } from 'react';
-
+import {widthToDp,HeightToDp} from '../Responsive'
 const Home = ({navigation})=> {
 
     const [data,setData] = useState([])
@@ -54,7 +54,7 @@ const Home = ({navigation})=> {
         <FAB onPress={()=>navigation.navigate("Create")}
             style={styles.fab}
             small={false}
-            theme={{colors:{accent:"#006aff"}}}
+            theme={{colors:{accent:"#019386"}}}
             icon="plus"
            
         />
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         padding:6
     },
     text:{
-        fontSize:18,
+        fontSize:widthToDp("5%"),
     }, fab: {
         position: 'absolute',
         margin: 16,

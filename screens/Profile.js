@@ -3,6 +3,7 @@ import { StyleSheet, StatusBar, ScrollView, Text, View, Image, FlatList, Alert }
 import { LinearGradient } from 'expo-linear-gradient';
 import { Title, Card, Button } from 'react-native-paper';
 import { MaterialIcons, MaterialCommunityIcons, Octicons, AntDesign, Entypo } from '@expo/vector-icons';
+import {widthToDp,HeightToDp} from '../Responsive'
 
 
 const Profile = (props) => {
@@ -30,8 +31,8 @@ const Profile = (props) => {
     return (
         <View style={style.root}>
             <LinearGradient
-                colors={["#0033ff", "#6bc1ff"]}
-                style={{ height: "14%" }}
+                colors={["#019386", "#00887A"]}
+                style={{ height: "15%" }}
             />
             <View style={{ alignItems: "center" }} >
                 <Image
@@ -45,19 +46,19 @@ const Profile = (props) => {
                 </View>
                 <Card style={style.myCard}>
                     <View style={style.cardContent}>
-                        <MaterialIcons name="email" size={20} color="#006aff" />
+                        <MaterialIcons name="email" size={20} color="#019386" />
                         <Text style={style.myText}>{email}</Text>
                     </View>
                 </Card>
                 <Card style={style.myCard}>
                     <View style={style.cardContent}>
-                        <Entypo name="phone" size={20} color="#006aff" />
+                        <Entypo name="phone" size={20} color="#019386" />
                         <Text style={style.myText}>{phone}</Text>
                     </View>
                 </Card>
                 <Card style={style.myCard}>
                     <View style={style.cardContent}>
-                        <MaterialIcons name="attach-money" size={20} color="#006aff" />
+                        <MaterialIcons name="attach-money" size={20} color="#019386" />
                         <Text style={style.myText}>{salary}</Text>
                     </View>
                 </Card>
@@ -67,7 +68,7 @@ const Profile = (props) => {
                             <Text style={style.myText}>
                                 Bio
                         </Text>
-                            <AntDesign name="user" size={20} color="#006aff" />
+                            <AntDesign name="user" size={20} color="#019386" />
                         </View >
                         <View style={{ marginVertical: 8 }}>
                             <Text style={{ color: "#a4a4a4" }}>{bio}</Text>
@@ -80,7 +81,7 @@ const Profile = (props) => {
                             <Text style={style.myText}>
                                 Education
                         </Text>
-                            <MaterialCommunityIcons name="pen" size={20} color="#006aff" />
+                            <MaterialCommunityIcons name="pen" size={20} color="#019386" />
                         </View >
                         <View style={{ marginVertical: 8 }}>
                             <Text style={{ color: "#a4a4a4" }}>{education}</Text>
@@ -93,22 +94,22 @@ const Profile = (props) => {
                             <Text style={style.myText}>
                                 Projects
                         </Text>
-                            <Octicons name="project" size={20} color="#006aff" />
+                            <Octicons name="project" size={20} color="#019386" />
                         </View >
                         <View style={{ marginVertical: 8 }}>
                             <Text style={{ color: "#a4a4a4" }}>{project}</Text>
                         </View>
                     </View>
                 </Card>
-                <View style={{ flexDirection: "row", justifyContent: "space-around", padding: 10 }} >
+                <View style={{ flexDirection: "row", justifyContent: "space-around", padding: 20 }} >
                     <Button theme={theme}
                         icon="account-edit" mode="contained" onPress={() => {
                             props.navigation.navigate("Create",
                                 { _id, name, email, picture, salary, phone, position, bio, education, project }
                             )
-                        }}>Edit CV</Button>
+                        }}>Edit     </Button>
                     <Button theme={theme}
-                        icon="delete" mode="contained" onPress={() => deleteEmploye()}>Delete CV</Button>
+                        icon="delete" mode="contained" onPress={() => deleteEmploye()}>Delete</Button>
                 </View>
             </ScrollView>
         </View>
@@ -117,7 +118,7 @@ const Profile = (props) => {
 }
 const theme = {
     colors: {
-        primary: "#006aff"
+        primary: "#019386"
     }
 }
 
