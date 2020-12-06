@@ -1,4 +1,4 @@
-#Code can be found in master branch
+## Code can be found in master branch
 # Cv Builder App
 
 The app is used for creating and storing multiple resume's. 
