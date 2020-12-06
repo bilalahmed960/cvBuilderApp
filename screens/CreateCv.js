@@ -6,8 +6,8 @@ import * as Permissions from 'expo-permissions'
 
  // add the Ngrok created link to the below Url eg-->
  //const Url="http://9bc4a20e9985.ngrok.io"
- const Url=""
- const Url="http://9bc4a20e9985.ngrok.io"
+ const Url="paste link here"
+
 
 const CreateEmployee = ({ navigation, route }) => {
     const getDetails = (type) => {
