@@ -4,6 +4,11 @@ import { TextInput, Button, Card } from 'react-native-paper'
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions'
 
+ // add the Ngrok created link to the below Url eg-->
+ //const Url="http://9bc4a20e9985.ngrok.io"
+ const Url=""
+ const Url="http://9bc4a20e9985.ngrok.io"
+
 const CreateEmployee = ({ navigation, route }) => {
     const getDetails = (type) => {
         if (route.params) {
@@ -43,7 +48,7 @@ const CreateEmployee = ({ navigation, route }) => {
     const [enableshift, setenableShift] = useState(false)
 
     const submitData = () => {
-        fetch("http://e8d61e58a27a.ngrok.io/send-data", {
+        fetch(`${Url}/send-data`, {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +75,7 @@ const CreateEmployee = ({ navigation, route }) => {
             })
     }
     const updateDetails = () => {
-        fetch("http://e8d61e58a27a.ngrok.io/update", {
+        fetch(`${Url}/update`, {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'

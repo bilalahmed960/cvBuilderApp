@@ -3,14 +3,16 @@ import { StyleSheet, StatusBar, ScrollView, Text, View, Image, FlatList, Alert }
 import { LinearGradient } from 'expo-linear-gradient';
 import { Title, Card, Button } from 'react-native-paper';
 import { MaterialIcons, MaterialCommunityIcons, Octicons, AntDesign, Entypo } from '@expo/vector-icons';
-import {widthToDp,HeightToDp} from '../Responsive'
 
-
+// add the Ngrok created link to the below Url eg-->
+ //const Url="http://9bc4a20e9985.ngrok.io"
+ const Url="paste link here"
+ 
 const Profile = (props) => {
 
     const { _id, name, email, picture, salary, phone, position, bio, education, project } = props.route.params.item
     const deleteEmploye = () => {
-        fetch("http://e8d61e58a27a.ngrok.io/delete", {
+        fetch(`${Url}/delete`, {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -32,7 +34,7 @@ const Profile = (props) => {
         <View style={style.root}>
             <LinearGradient
                 colors={["#019386", "#00887A"]}
-                style={{ height: "15%" }}
+                style={{ height: "14%" }}
             />
             <View style={{ alignItems: "center" }} >
                 <Image

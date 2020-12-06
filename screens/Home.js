@@ -3,12 +3,17 @@ import { StyleSheet, Text, View, Image,FlatList, Alert } from 'react-native';
 import {Card,FAB} from 'react-native-paper'
 import { useEffect, useState } from 'react';
 import {widthToDp,HeightToDp} from '../Responsive'
+
+ // add the Ngrok created link to the below Url eg-->
+ //const Url="http://9bc4a20e9985.ngrok.io"
+ const Url="paste link here"
+
 const Home = ({navigation})=> {
 
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(true)
     const fetchData = ()=>{
-        fetch("http://e8d61e58a27a.ngrok.io/")
+        fetch(Url)
         .then(res=>res.json())
         .then(results=>{
             setData(results)
