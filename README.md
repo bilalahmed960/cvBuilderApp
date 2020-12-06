@@ -1,7 +1,8 @@
 ## Code can be found in master branch
 # Cv Builder App
 
-The app is used for creating and storing multiple resume's. 
+The app is used for creating and storing multiple resume's.
+Backend is created using Node Js server and MongoDb, all crud operations are being performed inside the app.
 
 ## Installation
 
@@ -50,7 +51,8 @@ npm start android
 ```
 (in cmd from inside the app folder)
  then scan Qr Code and there you go.  
-
+## Author
+Bilal Ahmed
 
 
 
